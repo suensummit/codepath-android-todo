@@ -7,20 +7,23 @@ import android.view.View;
 import android.widget.EditText;
 
 public class EditItemActivity extends AppCompatActivity {
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        EditText itemEdit = (EditText) findViewById(R.id.etEditItem);
-        itemEdit.setText(getIntent().getStringExtra("itemEdit"));
+        EditText etEditItem = (EditText) findViewById(R.id.etEditItem);
+        pos = getIntent().getIntExtra("itemPos", 0);
+        etEditItem.setText(getIntent().getStringExtra("itemEdit"));
     }
 
     public void onEditItem(View v) {
         EditText etEditItem = (EditText) findViewById(R.id.etEditItem);
         Intent data = new Intent();
         data.putExtra("itemEdit", etEditItem.getText().toString());
+        data.putExtra("itemPos", pos);
         setResult(RESULT_OK, data);
         finish();
     }

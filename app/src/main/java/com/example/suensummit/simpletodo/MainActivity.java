@@ -92,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             String item = data.getExtras().getString("itemEdit");
-            int code = data.getExtras().getInt("code", 0);
+            int pos = data.getExtras().getInt("itemPos");
+
+            items.set(pos, item);
+            itemsAdapter.notifyDataSetChanged();
+            writeItems();
 
             Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
         }
